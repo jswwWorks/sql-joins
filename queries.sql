@@ -4,15 +4,15 @@ SELECT *
             ON vehicles.owner_id = owners.id;
 
 
-SELECT owners.first_name, COUNT(*)
-    FROM vehicles
-        LEFT OUTER JOIN owners
+SELECT owners.first_name, COUNT(vehicles.id)
+    FROM owners
+        LEFT OUTER JOIN vehicles
             ON vehicles.owner_id = owners.id
     GROUP BY owners.id
     ORDER BY owners.first_name;
 
 
-SELECT owners.first_name, AVG(vehicles.price)::integer, COUNT(*)
+SELECT owners.first_name, AVG(vehicles.price)::integer AS average_price, COUNT(*)
     FROM vehicles
             LEFT OUTER JOIN owners
                 ON vehicles.owner_id = owners.id
